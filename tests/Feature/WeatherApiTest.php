@@ -28,7 +28,6 @@ class WeatherApiTest extends TestCase
     {
         $response = $this->get('/api/weather/by_city_id?city_id=1496153');
         $content = json_decode($response->getContent());
-        var_dump($content);
         $this->assertTrue($content->cod == 200);
         $response->assertStatus(200);
     }
