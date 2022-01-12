@@ -15,8 +15,12 @@ class WeatherApiTest extends TestCase
     {
         $response = $this->get('/api/weather/get?by_object=city_name&object=omsk');
         $content = json_decode($response->getContent());
-        var_dump($content);
         $this->assertTrue($content->cod == 200);
+        $this->assertEquals('Omsk', $content->name);
+        $this->assertObjectHasAttribute('id',$content->weather[0]);
+        $this->assertObjectHasAttribute('main',$content->weather[0]);
+        $this->assertObjectHasAttribute('description',$content->weather[0]);
+        $this->assertObjectHasAttribute('icon',$content->weather[0]);
         $response->assertStatus(200);
     }
 
@@ -29,8 +33,12 @@ class WeatherApiTest extends TestCase
     {
         $response = $this->get('/api/weather/get?by_object=city_id&object=1496153');
         $content = json_decode($response->getContent());
-        var_dump($content);
         $this->assertTrue($content->cod == 200);
+        $this->assertEquals('Omsk', $content->name);
+        $this->assertObjectHasAttribute('id',$content->weather[0]);
+        $this->assertObjectHasAttribute('main',$content->weather[0]);
+        $this->assertObjectHasAttribute('description',$content->weather[0]);
+        $this->assertObjectHasAttribute('icon',$content->weather[0]);
         $response->assertStatus(200);
     }
 }
