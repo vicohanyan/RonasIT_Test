@@ -13,8 +13,9 @@ class WeatherApiTest extends TestCase
      */
     public function testGetWeatherByCityName()
     {
-        $response = $this->get('/api/weather/by_city_name?city_name=omsk');
+        $response = $this->get('/api/weather/get?by_object=city_name&object=omsk');
         $content = json_decode($response->getContent());
+        var_dump($content);
         $this->assertTrue($content->cod == 200);
         $response->assertStatus(200);
     }
@@ -26,8 +27,9 @@ class WeatherApiTest extends TestCase
      */
     public function testGetWeatherByCityID()
     {
-        $response = $this->get('/api/weather/by_city_id?city_id=1496153');
+        $response = $this->get('/api/weather/get?by_object=city_id&object=1496153');
         $content = json_decode($response->getContent());
+        var_dump($content);
         $this->assertTrue($content->cod == 200);
         $response->assertStatus(200);
     }

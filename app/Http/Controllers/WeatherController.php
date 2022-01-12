@@ -2,33 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\WeatherService;
-use Illuminate\Http\Request;
+use App\Http\Requests\WeatherGetRequest;
+use App\Services\WeatherServiceInterface;
 
 class WeatherController extends Controller
 {
-    private WeatherService $weatherService;
+    private WeatherServiceInterface $weatherService;
 
-    public function __construct(WeatherService $weatherService)
+    public function __construct(WeatherServiceInterface $weatherService)
     {
         $this->weatherService = $weatherService;
     }
 
     /**
-     * @param Request $request
+     * @param WeatherGetRequest $request
      * @return array
      */
-    public function getWeatherByCityName(Request $request): array
+    public function getWeather(WeatherGetRequest $request): array
     {
-        return $this->weatherService->getWeatherByCityName($request->city_name);
-    }
-
-    /**
-     * @param Request $request
-     * @return array
-     */
-    public function getWeatherByCityID(Request $request): array
-    {
-        return $this->weatherService->getWeatherByCityID($request->city_id);
+        return $this->weatherService->getWeather($request->by_object, $request->object);
     }
 }
